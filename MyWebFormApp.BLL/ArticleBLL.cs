@@ -17,6 +17,23 @@ namespace MyWebFormApp.BLL
             _articleDAL = new ArticleDAL();
         }
 
+        public void Delete(int id)
+        {
+            if (id <= 0)
+            {
+                throw new ArgumentException("ArticleID is required");
+            }
+
+            try
+            {
+                _articleDAL.Delete(id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public IEnumerable<ArticleDTO> GetArticleByCategory(int categoryId)
         {
             List<ArticleDTO> articles = new List<ArticleDTO>();
@@ -91,6 +108,41 @@ namespace MyWebFormApp.BLL
                 _articleDAL.Insert(article);
             }
             catch (System.Exception ex)
+            {
+                throw new ArgumentException(ex.Message);
+            }
+        }
+
+        public void Update(ArticleUpdateDTO article)
+        {
+            if (article.ArticleID <= 0)
+            {
+                throw new ArgumentException("ArticleID is required");
+            }
+            if (string.IsNullOrEmpty(article.Title))
+            {
+                throw new ArgumentException("Title is required");
+            }
+            if (string.IsNullOrEmpty(article.Details))
+            {
+                throw new ArgumentException("Details is required");
+            }
+
+            try
+            {
+                var updateArticle = new Article
+                {
+                    ArticleID = article.ArticleID,
+                    CategoryID = article.CategoryID,
+                    Title = article.Title,
+                    Details = article.Details,
+                    IsApproved = article.IsApproved,
+                    Pic = article.Pic
+                };
+
+                _articleDAL.Update(updateArticle);
+            }
+            catch (Exception ex)
             {
                 throw new ArgumentException(ex.Message);
             }

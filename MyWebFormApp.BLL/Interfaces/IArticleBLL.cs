@@ -10,5 +10,7 @@ namespace MyWebFormApp.BLL.Interfaces
         void Insert(ArticleCreateDTO entity);
         IEnumerable<ArticleDTO> GetArticleWithCategory();
         IEnumerable<ArticleDTO> GetArticleByCategory(int categoryId);
+        void Update(ArticleUpdateDTO article);
+        void Delete(int id);
     }
 }

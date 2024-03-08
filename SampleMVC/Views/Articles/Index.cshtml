@@ -39,6 +39,8 @@
                         <th>created</th>
                         <th>approval</th>
                         <th>gambar</th>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
                     </tr>
                     @foreach (var category in Model.Articles)
                     {
@@ -51,6 +53,10 @@
                             <td>@category.IsApproved</td>
                             <td>
                                 <img sizes="10" src="~/Pics/@category.Pic" alt="Gambar tidak ada" style="max-height:50px" />
+                            </td>
+                            <td><a href="/Articles/Edit/@category.ArticleID" class="btn btn-warning btn-sm">edit</a></td>
+                            <td>
+                                <a href="/Articles/Delete/@category.ArticleID" class="btn btn-danger btn-sm">delete</a>
                             </td>
                         </tr>
                     }

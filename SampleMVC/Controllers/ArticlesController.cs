@@ -74,28 +74,32 @@ namespace SampleMVC.Controllers
         // GET: ArticlesController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var articles = _articleBLL.GetArticleWithCategory();
+            var categories = _categoryBLL.GetAll();
+            var models = new ViewArticle { Articles = articles, Category = categories };
+            return View(models);
         }
 
         // POST: ArticlesController/Edit/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(ArticleUpdateDTO articleUpdateDTO)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                _articleBLL.Update(articleUpdateDTO);
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                TempData["message"] = $"<div class='alert alert-danger'><strong>Error!</strong>{ex.Message}</div>";
             }
+            return RedirectToAction("Index");
         }
 
         // GET: ArticlesController/Delete/5
-        public ActionResult Delete(int id)
+        public IActionResult Delete(int id)
         {
-            return View();
+            _articleBLL.Delete(id);
+            return RedirectToAction("Index");
         }
 
         // POST: ArticlesController/Delete/5
