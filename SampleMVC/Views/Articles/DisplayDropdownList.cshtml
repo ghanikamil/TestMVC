@@ -1,0 +1,48 @@
+﻿<div class="row">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Articles Page</h1>
+    </div>
+
+    <div class="col-lg-12">
+        <!-- Basic Card Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Article Page</h6>
+            </div>
+            <div class="card-body">
+
+                <a href="/Categories/Create" class="btn btn-success btn-sm">Create New Category</a>&nbsp;
+                <br />
+                <br />
+
+                <table class="table table-striped">
+                    <tr>
+                        <th>ID</th>
+                        <th>Category</th>
+                        <th>Title</th>
+                        <th>Details</th>
+                        <th>created</th>
+                        <th>approval</th>
+                        <th>gambar</th>
+                    </tr>
+                    @foreach (var category in Model)
+                    {
+                        <tr>
+                            <td>@category.ArticleID</td>
+                            <td>@category.Category.CategoryName</td>
+                            <td>@category.Title</td>
+                            <td>@category.Details</td>
+                            <td>@category.PublishDate</td>
+                            <td>@category.IsApproved</td>
+                            <td>
+                                <img sizes="10" src="~/Pics/@category.Pic" alt="Gambar tidak ada" style="max-height:50px" />
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</div>

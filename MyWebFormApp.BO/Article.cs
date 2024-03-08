@@ -4,6 +4,8 @@ namespace MyWebFormApp.BO
 {
     public class Article
     {
+
+
         public int ArticleID { get; set; }
         public int CategoryID { get; set; }
         public string Title { get; set; }

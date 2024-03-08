@@ -6,5 +6,6 @@ namespace MyWebFormApp.DAL.Interfaces
     public interface ICategoryDAL : ICrud<Category>
     {
         IEnumerable<Category> GetByName(string name);
+        int InsertWithIdentity(Category category);
     }
 }

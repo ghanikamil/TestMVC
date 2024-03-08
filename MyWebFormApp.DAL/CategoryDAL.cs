@@ -13,7 +13,8 @@ namespace MyWebFormApp.DAL
         private string GetConnectionString()
         {
             //return @"Data Source=ACTUAL;Initial Catalog=LatihanDb;Integrated Security=True;TrustServerCertificate=True";
-            return ConfigurationManager.ConnectionStrings["MyDbConnectionString"].ConnectionString;
+            //return ConfigurationManager.ConnectionStrings["MyDbConnectionString"].ConnectionString;
+            return Helper.GetConnectionString();
         }
 
         public void Delete(int id)
@@ -66,7 +67,13 @@ namespace MyWebFormApp.DAL
 
         public IEnumerable<Category> GetByName(string name)
         {
-            throw new NotImplementedException();
+            using (SqlConnection conn = new SqlConnection(GetConnectionString()))
+            {
+                var strSql = @"select * from Categories where CategoryName like @CategoryName";
+                var param = new { CategoryName = $"%{name}%" };
+                var results = conn.Query<Category>(strSql, param);
+                return results;
+            }
         }
 
         public void Insert(Category entity)
@@ -78,10 +85,10 @@ namespace MyWebFormApp.DAL
                 try
                 {
                     int result = conn.Execute(strSql, param, commandType: System.Data.CommandType.StoredProcedure);
-                    if (result != 1)
-                    {
-                        throw new ArgumentException("Insert data failed..");
-                    }
+                    //if (result != 1)
+                    //{
+                    //    throw new ArgumentException("Insert data failed..");
+                    //}
                 }
                 catch (SqlException sqlEx)
                 {
@@ -121,6 +128,11 @@ namespace MyWebFormApp.DAL
                 }
             }
 
+        }
+
+        public int InsertWithIdentity(Category category)
+        {
+            throw new NotImplementedException();
         }
     }
 }
