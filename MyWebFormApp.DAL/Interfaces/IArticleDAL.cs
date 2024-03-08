@@ -9,5 +9,6 @@ namespace MyWebFormApp.DAL.Interfaces
     {
         IEnumerable<Article> GetArticlesWithCategory();
         IEnumerable<Article> GetArticleByCategory(int categoryId);
+
     }
 }

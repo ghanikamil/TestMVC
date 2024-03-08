@@ -4,7 +4,7 @@ namespace SampleMVC.Model
 {
     public class ViewArticle
     {
-        public required IEnumerable<ArticleDTO> Articles { get; set;}
-        public required IEnumerable<CategoryDTO> Category { get; set;}
+        public IEnumerable<ArticleDTO> Articles { get; set;}
+        public IEnumerable<CategoryDTO> Category { get; set;}
     }
 }

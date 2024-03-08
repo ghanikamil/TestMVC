@@ -74,9 +74,10 @@ namespace SampleMVC.Controllers
         // GET: ArticlesController/Edit/5
         public ActionResult Edit(int id)
         {
-            var articles = _articleBLL.GetArticleWithCategory();
-            var categories = _categoryBLL.GetAll();
-            var models = new ViewArticle { Articles = articles, Category = categories };
+            //var articles = _articleBLL.GetArticleByCategory(id);
+            //var categories = _categoryBLL.GetAll();
+            //var models = new ViewArticle { Articles = articles, Category = categories };
+            var models = _articleBLL.GetArticleById(id);
             return View(models);
         }
 
